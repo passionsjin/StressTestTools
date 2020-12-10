@@ -18,6 +18,7 @@ PORT = ''
 USER = None
 PW = None
 
+
 class PyMongoManager:
     client = None
     db = None
@@ -103,7 +104,7 @@ def average(numbers):
 
 
 def clean(limit=10000):
-    a = PyMongoManager(HOST, PORT)
+    a = PyMongoManager(HOST, PORT, USER, PW)
 
     objects = a.search(limit=int(limit))
     # print dir(objects)
@@ -119,7 +120,7 @@ def clean(limit=10000):
 
 
 def test():
-    a = PyMongoManager(HOST, PORT)
+    a = PyMongoManager(HOST, PORT, USER, PW)
     c = [100, 1000, 10000, 100000, 1000000]  # rows number for each test
     print("######### TEST - n_rows\tinsert\tdelete\tsearch")
     for i in c:
@@ -146,7 +147,7 @@ def populate(limit):
         print("sorry... try harder")
         sys.exit(1)
 
-    a = PyMongoManager(HOST, PORT)
+    a = PyMongoManager(HOST, PORT, USER, PW)
 
     counter = 0
     line = 0
@@ -174,7 +175,7 @@ def populate(limit):
 
 # 1초에 한번씩 지속적으로 쿼리 날림. 언제 끊기는지 확인.
 def connect_test(term=1):
-    a = PyMongoManager(HOST, PORT)
+    a = PyMongoManager(HOST, PORT, USER, PW)
     counter = 0
     try:
         while True:
