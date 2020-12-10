@@ -56,7 +56,7 @@ class PyMongoManager:
         return cur
 
     def disconnect(self):
-        self.client.disconnect()
+        self.client.close()
 
     # Test Delete Function
     def test_delete_all(self):
