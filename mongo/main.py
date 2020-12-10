@@ -15,16 +15,17 @@ ACCESS_SAMPLE = '127.0.0.1 - - [29/Apr/2011:18:10:50 -0300] foreman "POST /repor
 ERROR_SAMPLE = '[Tue May 03 14:51:56 2011] [error] [client 0.0.0.0] client denied by server configuration: /mnt/puppet/conf/rack'
 HOST = ''
 PORT = ''
-
+USER = None
+PW = None
 
 class PyMongoManager:
     client = None
     db = None
 
-    def __init__(self, host, port):
+    def __init__(self, host, port, user=None, password=None):
         self.host = host
         self.port = port
-        self.client = pymongo.MongoClient(self.host, self.port)
+        self.client = pymongo.MongoClient(self.host, self.port, username=user, password=password)
         self.db = self.client['test_db']
 
     # generic insert function
