@@ -14,9 +14,9 @@ import pymongo
 ACCESS_SAMPLE = '127.0.0.1 - - [29/Apr/2011:18:10:50 -0300] foreman "POST /reports/create?format=yml HTTP/1.1" 200 15 "-" "-" "-" - 0'
 ERROR_SAMPLE = '[Tue May 03 14:51:56 2011] [error] [client 0.0.0.0] client denied by server configuration: /mnt/puppet/conf/rack'
 HOST = ''
-PORT = ''
-USER = None
-PW = None
+PORT = 27017
+USER = ''
+PW = ''
 
 
 class PyMongoManager:
@@ -31,7 +31,7 @@ class PyMongoManager:
 
     # generic insert function
     def insert(self, k, v):
-        self.db.test.insert({"key": k, "value": v})
+        self.db.test.insert({k: v})
 
     # generic Delete all rows function
     def delete_all(self):
@@ -56,7 +56,7 @@ class PyMongoManager:
         return cur
 
     def disconnect(self):
-        self.client.disconnect()
+        self.client.close()
 
     # Test Delete Function
     def test_delete_all(self):
@@ -180,7 +180,7 @@ def connect_test(term=1):
     try:
         while True:
             now_time = datetime.datetime.now()
-            a.insert(k=str(now_time), v='Done')
+            a.insert(k=str(int(now_time.timestamp())), v=str(now_time))
             counter += 1
             print('%d 번째 쿼리 - 시간 : %s' % (counter, now_time))
             sleep(term)
