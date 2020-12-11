@@ -11,12 +11,10 @@ from time import sleep
 
 import pymongo
 
+from mongo.db_conf import HOST, PORT, USER, PW
+
 ACCESS_SAMPLE = '127.0.0.1 - - [29/Apr/2011:18:10:50 -0300] foreman "POST /reports/create?format=yml HTTP/1.1" 200 15 "-" "-" "-" - 0'
 ERROR_SAMPLE = '[Tue May 03 14:51:56 2011] [error] [client 0.0.0.0] client denied by server configuration: /mnt/puppet/conf/rack'
-HOST = ''
-PORT = 27017
-USER = ''
-PW = ''
 
 
 class PyMongoManager:
